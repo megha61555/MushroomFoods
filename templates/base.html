@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Mushroom Foods 🍄{% endblock %}</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <!-- Font Awesome for social icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+</head>
+
+<body>
+
+  <!-- Transparent Navbar -->
+  <nav class="navbar">
+    <div class="logo">🍄 Mushroom Foods</div>
+    <div class="menu-icon" id="menu-icon">☰</div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+      <li><a href="/products" class="{% if '/products' in request.path %}active{% endif %}">Products</a></li>
+      <li><a href="/about" class="{% if '/about' in request.path %}active{% endif %}">About</a></li>
+      <li><a href="/contact" class="{% if '/contact' in request.path %}active{% endif %}">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Content (fit to screen) -->
+  <main class="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Transparent Footer -->
+  <footer class="footer">
+    <p>© 2025 Mushroom Foods | All rights reserved</p>
+    <div class="social-icons">
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    const menuIcon = document.getElementById('menu-icon');
+    const navLinks = document.getElementById('nav-links');
+    menuIcon.addEventListener('click', () => navLinks.classList.toggle('active'));
+  </script>
+</body>
+</html>

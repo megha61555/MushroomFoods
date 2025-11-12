@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Contact | Mushroom Foods{% endblock %}
+
+{% block content %}
+<section class="contact-container">
+  <h1>Contact Us</h1>
+  <p>We’d love to hear from you! Fill out the form below.</p>
+
+   {% if success %}
+  <div class="success-msg">✅ Your message has been sent successfully!</div>
+  {% endif %}
+
+  <form method="POST" class="contact-form">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, msg in messages %}
+        <p class="{{ category }}">{{ msg }}</p>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</section>
+{% endblock %}
+
+
