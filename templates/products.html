@@ -13,10 +13,12 @@
         <p>{{ product.description }}</p>
         <div class="price">₹{{ product.price }}</div>
 
+        <!-- Tabs -->
         <div class="tabs">
-          <div class="tab" onclick="toggleTab(this)">Usage</div>
-          <div class="tab" onclick="toggleTab(this)">Health Benefits</div>
+          <div class="tab" onclick="toggleTab(this, 0)">Usage</div>
+          <div class="tab" onclick="toggleTab(this, 1)">Health Benefits</div>
         </div>
+
         <div class="tab-content">{{ product.usage }}</div>
         <div class="tab-content">{{ product.health_benefits }}</div>
       </div>
@@ -26,17 +28,28 @@
 </section>
 
 <script>
-function toggleTab(tab) {
+function toggleTab(tab, index) {
   const card = tab.closest('.product-card');
+  const tabs = card.querySelectorAll('.tab');
   const contents = card.querySelectorAll('.tab-content');
-  const index = Array.from(tab.parentElement.children).indexOf(tab);
 
   contents.forEach((c, i) => {
     c.style.display = i === index ? (c.style.display === 'block' ? 'none' : 'block') : 'none';
   });
+
+  // Highlight active tab
+  tabs.forEach((t, i) => {
+    if(i === index && contents[index].style.display === 'block'){
+        t.style.backgroundColor = '#ddd';
+    } else {
+        t.style.backgroundColor = '#f7f7f7';
+    }
+  });
 }
+
 document.body.classList.add("products-page");
 </script>
+
 {% endblock %}
 
 
